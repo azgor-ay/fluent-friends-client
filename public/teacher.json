@@ -1,0 +1,74 @@
+[
+  {
+    "img": "https://i.ibb.co/DY444j7/jp.jpg",
+    "name": "Yuko Tanaka",
+    "email": "yuko.tanaka@example.com",
+    "age": 35,
+    "classes": [
+      "Japanese",
+      "Culture",
+      "Literature"
+    ],
+    "classes_number": 3
+  },
+  {
+    "img": "https://i.ibb.co/SX03Lq7/ar.jpg",
+    "name": "Ahmed Ibrahim",
+    "email": "ahmed.ibrahim@example.com",
+    "age": 42,
+    "classes": [
+      "Arabic",
+      "Calligraphy",
+      "Literature"
+    ],
+    "classes_number": 3
+  },
+  {
+    "img": "https://i.ibb.co/yds5ctb/ko.jpg",
+    "name": "Ji-hyun Kim",
+    "email": "ji-hyun.kim@example.com",
+    "age": 28,
+    "classes": [
+      "Korean",
+      "Grammar",
+      "Conversation"
+    ],
+    "classes_number": 3
+  },
+  {
+    "img": "https://i.ibb.co/NrfTLLQ/tel.jpg",
+    "name": "Suresh Reddy",
+    "email": "suresh.reddy@example.com",
+    "age": 39,
+    "classes": [
+      "Telugu",
+      "Grammar",
+      "Conversation"
+    ],
+    "classes_number": 3
+  },
+  {
+    "img": "https://i.ibb.co/jZ6vJQh/mal.jpg",
+    "name": "Deepa Nair",
+    "email": "deepa.nair@example.com",
+    "age": 32,
+    "classes": [
+      "Malayalam",
+      "Literature",
+      "Grammar"
+    ],
+    "classes_number": 3
+  },
+  {
+    "img": "https://i.ibb.co/1GqzPdp/spa.jpg",
+    "name": "Maria Rodriguez",
+    "email": "maria.rodriguez@example.com",
+    "age": 37,
+    "classes": [
+      "Spanish",
+      "Conversation",
+      "Grammar"
+    ],
+    "classes_number": 3
+  }
+]

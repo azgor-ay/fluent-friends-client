@@ -22,7 +22,7 @@ const NavBar = () => {
   }, [theme]);
 
   return (
-    <div className="drawer fixed z-10 container mx-auto bg-black bg-opacity-20">
+    <div className="drawer rounded-3xl mb-6 bg-black bg-opacity-20">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}

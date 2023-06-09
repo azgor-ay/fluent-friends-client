@@ -7,11 +7,13 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
-
-import bg from "../assets/banner/bg.png";
+import useClasses from "../hooks/useClasses";
 import BannerCard from "./ShareAble/BannerCard";
 
+// import bg from "../assets/banner/bg.png";
+
 const HomeSlider = () => {
+  const classes = useClasses();
   return (
     <div>
       <Swiper
@@ -21,9 +23,11 @@ const HomeSlider = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-        <BannerCard></BannerCard>
-        </SwiperSlide>
+        {classes.map((slide) => (
+          <SwiperSlide key={slide.name}>
+            <BannerCard slide={slide}></BannerCard>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

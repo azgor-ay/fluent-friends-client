@@ -14,9 +14,9 @@
 }
 
 .default{
- @apply text-xl font-semibold bg-none mx-2
+ @apply text-xl font-semibold mx-2
 }
 
 .active{
- @apply text-xl font-semibold bg-none mx-2 text-primary 
+ @apply text-xl font-semibold mx-2 text-primary
 }

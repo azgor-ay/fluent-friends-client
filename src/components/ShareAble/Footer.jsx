@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div>
-      <div className="btm-nav">
+      {/* <div className="btm-nav">
         <button>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -53,12 +53,11 @@ const Footer = () => {
           </svg>
           <span className="btm-nav-label">Statics</span>
         </button>
-        
-      </div>
-      <footer className="footer footer-center p-4 bg-primary">
+      </div> */}
+      <footer className="footer footer-center p-4 bg-base-300 mt-12">
         <div>
           <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
-        </div>
+        </div>  
       </footer>
     </div>
   );
