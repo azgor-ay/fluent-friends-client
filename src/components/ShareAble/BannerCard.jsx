@@ -13,7 +13,7 @@ const BannerCard = ({ slide }) => {
       <div className="hero-overlay bg-opacity-50 rounded-3xl"></div>
       <div className="hero-content text-neutral-content p-24">
         <div className="grid grid-cols-2 gap-12 items-center text-right">
-          <div>
+          <div className="flex flex-col justify-center items-center gap-5">
             <img src={flag} className="w-96" />
             <h1 className="text-4xl font-semibold">{name}</h1>
           </div>

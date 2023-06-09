@@ -6,9 +6,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // import required modules
-import { Pagination } from "swiper";
-import useClasses from "../hooks/useClasses";
-import BannerCard from "./ShareAble/BannerCard";
+import { Pagination, } from "swiper";
+import useClasses from "../../hooks/useClasses";
+import BannerCard from "../ShareAble/BannerCard";
 
 // import bg from "../assets/banner/bg.png";
 
@@ -17,6 +17,8 @@ const HomeSlider = () => {
   return (
     <div>
       <Swiper
+      autoplay={true}
+      loop={true}
         pagination={{
           dynamicBullets: true,
         }}
