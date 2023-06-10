@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,7 @@ const NavBar = () => {
   }, [theme]);
 
   return (
-    <div className="drawer rounded-3xl mb-6 bg-black bg-opacity-20">
+    <div className="drawer rounded-3xl bg-base-100 text-base-content">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
@@ -62,6 +62,7 @@ const NavBar = () => {
             </ul>
           </div>
           <div>
+            <Link to='/login' className="btn btn-primary btn-sm">LOGIN</Link>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
@@ -70,7 +71,7 @@ const NavBar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu z-10 menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
                 <a className="justify-between">
@@ -79,14 +80,11 @@ const NavBar = () => {
                 </a>
               </li>
               <li>
-                <a>Settings</a>
-              </li>
-              <li>
                 <a>Logout</a>
               </li>
             </ul>
           </div>
-          <label className="swap swap-rotate px-6">
+          <label className="swap swap-rotate mx-6">
               {/* this hidden checkbox controls the state */}
               <input
                 type="checkbox"

@@ -6,7 +6,7 @@ const PopularClasses = () => {
   const classes = useClasses();
   const [text] = useTypewriter({
     words: ["Popular Classes", "Best instructor's Classes"],
-    loop: 3,
+    loop: Infinity,
     onLoopDone: () => console.log(`loop completed after 3 runs.`),
   });
   return (

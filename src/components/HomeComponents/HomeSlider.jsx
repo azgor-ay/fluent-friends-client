@@ -15,7 +15,7 @@ import BannerCard from "../ShareAble/BannerCard";
 const HomeSlider = () => {
   const classes = useClasses();
   return (
-    <div>
+    <div className="">
       <Swiper
       autoplay={true}
       loop={true}
@@ -26,7 +26,7 @@ const HomeSlider = () => {
         className="mySwiper"
       >
         {classes.map((slide) => (
-          <SwiperSlide key={slide.name}>
+          <SwiperSlide key={slide.name} className="min-h-screen">
             <BannerCard slide={slide}></BannerCard>
           </SwiperSlide>
         ))}

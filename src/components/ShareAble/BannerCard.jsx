@@ -5,7 +5,7 @@ const BannerCard = ({ slide }) => {
   const { name, flag, price, available_seats, enrolled_students, instructor } = slide;
   return (
     <div
-      className="hero min-h-fit bg-fixed rounded-3xl"
+      className="hero min-h-screen rounded-3xl bg-base-200"
       style={{
         backgroundImage: `url(https://i.ibb.co/M5nN8Dr/bg.png)`,
       }}

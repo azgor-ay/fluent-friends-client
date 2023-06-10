@@ -10,7 +10,7 @@
 }
 
 .page-heading{
-    @apply text-5xl font-semibold uppercase text-center py-12; 
+    @apply text-5xl font-semibold uppercase text-center py-12 mt-12; 
 }
 
 .default{
