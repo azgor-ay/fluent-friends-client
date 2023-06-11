@@ -10,6 +10,10 @@ const Home = () => {
       <PopularClasses></PopularClasses>
       <ApplyCard></ApplyCard>
       <UpcomingCourse></UpcomingCourse>
+
+      {/* TODO */}
+      https://www.youtube.com/watch?v=NWyWoW61B3I
+      
     </div>
   );
 };
