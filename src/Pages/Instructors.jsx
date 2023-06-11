@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Card2 from "../components/ShareAble/Card2";
 import useInstructors from "../hooks/useInstructors";
 
@@ -5,6 +6,11 @@ const Instructors = () => {
   const data = useInstructors()
   return (
     <div>
+      <Helmet>
+        <title>
+        Fluent Friends| Instructors
+        </title>
+      </Helmet>
       <h1 className="page-heading">
         our <span className="text-primary">Instructors</span>
       </h1>

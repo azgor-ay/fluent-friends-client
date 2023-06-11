@@ -9,7 +9,6 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 const UpcomingCourse = () => {
   const [data, setData] = useState([]);
-  console.log(data);
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/region/europe")
       .then((res) => res.json())

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 const BannerCard = ({ slide }) => {
-  console.log(slide);
   const { name, flag, price, available_seats, enrolled_students, instructor } = slide;
   return (
     <div

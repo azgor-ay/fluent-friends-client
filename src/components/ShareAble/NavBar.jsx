@@ -1,8 +1,12 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+  const navigate = useNavigate()
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "synthwave"
   );
@@ -21,6 +25,14 @@ const NavBar = () => {
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
 
+  const handleLogOut = () =>{
+    logOut()
+    .then((result) => {
+      console.log(result.user);
+      navigate("/");
+    })
+    .catch((error) => console.log(error.message));
+  }
   return (
     <div className="drawer rounded-3xl bg-base-100 text-base-content">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -51,43 +63,77 @@ const NavBar = () => {
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
               <li>
-                <NavLink className={({isActive})=> isActive ? "active" : 'default'} to="/">Home</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active" : "default"
+                  }
+                  to="/"
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink className={({isActive})=> isActive ? "active" : 'default'} to="/instructors">Instructors</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active" : "default"
+                  }
+                  to="/instructors"
+                >
+                  Instructors
+                </NavLink>
               </li>
               <li>
-                <NavLink className={({isActive})=> isActive ? "active" : 'default'} to="/classes">classes</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active" : "default"
+                  }
+                  to="/classes"
+                >
+                  classes
+                </NavLink>
               </li>
-              <li>
-                <NavLink className={({isActive})=> isActive ? "active" : 'default'} to="/dashboard">Dashboard</NavLink>
-              </li>
+              {user && <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active" : "default"
+                  }
+                  to="/dashboard"
+                >
+                  Dashboard
+                </NavLink>
+              </li>}
             </ul>
           </div>
           <div>
-            <Link to='/login' className="btn btn-primary btn-sm">LOGIN</Link>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu z-10 menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </a>
+                  </li>
+                  <li onClick={handleLogOut}>
+                    <a>Logout</a>
+                  </li>
+                </ul>
               </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu z-10 menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-          <label className="swap swap-rotate mx-6">
+            ) : (
+              <Link to="/login" className="btn btn-primary btn-sm">
+                LOGIN
+              </Link>
+            )}
+
+            <label className="swap swap-rotate mx-6">
               {/* this hidden checkbox controls the state */}
               <input
                 type="checkbox"
@@ -112,7 +158,7 @@ const NavBar = () => {
               >
                 <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
               </svg>
-          </label>
+            </label>
           </div>
         </div>
       </div>

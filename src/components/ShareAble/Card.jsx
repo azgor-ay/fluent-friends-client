@@ -1,5 +1,4 @@
 const Card = ({ data }) => {
-  console.log(data);
   return (
     <div className="card w-96 bg-white text-black shadow-xl">
       <figure className="p-6">

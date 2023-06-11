@@ -1,6 +1,13 @@
+import { Helmet } from "react-helmet-async";
+
 const StudentDashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
+      <Helmet>
+        <title>
+        Fluent Friends| Student Dashboard 
+        </title>
+      </Helmet>
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content flex flex-col items-center justify-center">
     <div>
