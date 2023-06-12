@@ -8,34 +8,31 @@ import { Helmet } from "react-helmet-async";
 import SocialLogin from "../components/ShareAble/SocialLogin";
 import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
-  const {loginUser} = useContext(AuthContext)
+  const { loginUser } = useContext(AuthContext);
 
-  const handleLogin = (e) =>{
-    e.preventDefault()
-    const form = e.target; 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
     loginUser(email, password)
-    // eslint-disable-next-line no-unused-vars
-    .then(result => {
-      toast.success('Logged in Successfully')
-    })
-    .catch(error => {
-      toast.error(error.message)
-      console.log(error.message)
-    })
-  }
-
+      // eslint-disable-next-line no-unused-vars
+      .then((result) => {
+        toast.success("Logged in Successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="hero min-h-screen bg-base-100">
       <Helmet>
-        <title>
-          Fluent Friends | Login Now!
-        </title>
+        <title>Fluent Friends | Login Now!</title>
       </Helmet>
-      <Toaster/>
+      <Toaster />
       <div className="hero-content flex-col justify-between items-center lg:flex-row-reverse">
         <div className="text-center lg:text-left w-full">
           <Lottie animationData={world} />
@@ -44,33 +41,37 @@ const Login = () => {
           <div className="card-body">
             <h1 className="text-5xl font-bold text-center my-5">Login now!</h1>
 
-           <form onSubmit={handleLogin}>
-           <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="text"
-                placeholder="email"
-                name="email"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="text"
-                placeholder="password"
-                name="password"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control mt-6">
-              <input type="submit" className="btn btn-primary" value='LOGIN'/>
-            </div>
-           </form>
+            <form onSubmit={handleLogin}>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="email"
+                  name="email"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="password"
+                  name="password"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control mt-6">
+                <input
+                  type="submit"
+                  className="btn btn-primary"
+                  value="LOGIN"
+                />
+              </div>
+            </form>
 
             <p className="text-center">
               Don't have an account?{" "}

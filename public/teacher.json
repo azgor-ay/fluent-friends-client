@@ -4,11 +4,6 @@
     "name": "Yuko Tanaka",
     "email": "yuko.tanaka@example.com",
     "age": 35,
-    "classes": [
-      "Japanese",
-      "Culture",
-      "Literature"
-    ],
     "classes_number": 3
   },
   {
@@ -16,11 +11,6 @@
     "name": "Ahmed Ibrahim",
     "email": "ahmed.ibrahim@example.com",
     "age": 42,
-    "classes": [
-      "Arabic",
-      "Calligraphy",
-      "Literature"
-    ],
     "classes_number": 3
   },
   {
@@ -28,11 +18,6 @@
     "name": "Ji-hyun Kim",
     "email": "ji-hyun.kim@example.com",
     "age": 28,
-    "classes": [
-      "Korean",
-      "Grammar",
-      "Conversation"
-    ],
     "classes_number": 3
   },
   {
@@ -40,11 +25,6 @@
     "name": "Suresh Reddy",
     "email": "suresh.reddy@example.com",
     "age": 39,
-    "classes": [
-      "Telugu",
-      "Grammar",
-      "Conversation"
-    ],
     "classes_number": 3
   },
   {
@@ -52,11 +32,6 @@
     "name": "Deepa Nair",
     "email": "deepa.nair@example.com",
     "age": 32,
-    "classes": [
-      "Malayalam",
-      "Literature",
-      "Grammar"
-    ],
     "classes_number": 3
   },
   {
@@ -64,11 +39,6 @@
     "name": "Maria Rodriguez",
     "email": "maria.rodriguez@example.com",
     "age": 37,
-    "classes": [
-      "Spanish",
-      "Conversation",
-      "Grammar"
-    ],
     "classes_number": 3
   }
 ]

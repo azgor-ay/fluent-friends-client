@@ -14,12 +14,7 @@ const Card2 = ({ data }) => {
           <p>Age: {data.age}</p>
           <p>Classes: {data.classes_number}</p>
         </div>
-        <div className="card-actions justify-end">
-          {
-            data.classes.map((c, index) => <p key={index} className="badge">{c}</p>
-            )
-          }
-        </div>
+        
       </div>
     </div>
   );

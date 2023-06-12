@@ -20,3 +20,11 @@
 .active{
  @apply text-xl font-semibold mx-2 text-primary
 }
+
+.DashNav{
+    @apply text-xl 
+}
+
+.ActiveDashNav{
+    @apply text-xl font-semibold text-primary
+}

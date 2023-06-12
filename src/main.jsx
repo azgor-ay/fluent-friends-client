@@ -8,9 +8,11 @@ import Instructors from "./Pages/Instructors";
 import Classes from "./Pages/Classes";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import StudentDashboard from "./Pages/StudentDashboard";
 import AuthProvider from "./AuthProvider/AuthProvider";
 import { HelmetProvider } from "react-helmet-async";
+import Dashboard from "./Layouts/Dashboard";
+import SelectedClasses from "./Pages/Dashboard/SelectedClasses";
+import EnrolledClasses from "./Pages/Dashboard/EnrolledClasses";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +43,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <StudentDashboard></StudentDashboard>,
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/selectedClasses",
+        element: <SelectedClasses></SelectedClasses>
+      }, 
+      {
+        path: "/dashboard/enrolledClasses",
+        element: <EnrolledClasses></EnrolledClasses>
+      }
+    ]
   },
 ]);
 
