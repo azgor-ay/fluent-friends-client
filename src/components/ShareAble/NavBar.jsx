@@ -92,7 +92,7 @@ const NavBar = () => {
                   classes
                 </NavLink>
               </li>
-              {user && <li>
+               <li>
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "active" : "default"
@@ -101,7 +101,7 @@ const NavBar = () => {
                 >
                   Dashboard
                 </NavLink>
-              </li>}
+              </li>
             </ul>
           </div>
           <div>

@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Logo = () => {
   return (
-    <>
-      <span className="font-bold text-4xl"> <span className="text-primary">Fluent</span> Friends</span>
-    </>
+    <Link to="/">
+      <span  className="font-bold text-4xl"> <span className="text-primary">Fluent</span> Friends</span>
+    </Link>
   );
 };
 

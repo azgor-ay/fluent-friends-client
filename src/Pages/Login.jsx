@@ -2,14 +2,16 @@
 import world from "../assets/world.json";
 import Lottie from "lottie-react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import SocialLogin from "../components/ShareAble/SocialLogin";
 import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
-
+  const location = useLocation()
+  const from = location?.state?.from?.pathname || '/'
+  const navigate = useNavigate()
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,6 +22,7 @@ const Login = () => {
       // eslint-disable-next-line no-unused-vars
       .then((result) => {
         toast.success("Logged in Successfully");
+        navigate(from, {replace: true})
       })
       .catch((error) => {
         toast.error(error.message);

@@ -1,13 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import SocialLogin from "../components/ShareAble/SocialLogin";
 import { Toaster, toast } from "react-hot-toast";
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -16,17 +19,43 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
     if (data?.password !== data?.conPassword) {
-      toast.error('Password is not matched!')
-      console.log('not matched');
+      toast.error("Password did'nt matched!");
+      console.log("not matched");
     } else {
       registerUser(data.email, data.password)
         // eslint-disable-next-line no-unused-vars
-        .then((result) => {
-          toast.success('User created successfully!')
+        .then(() => {
+          toast.success("User created successfully!");
+          updateUserProfile(data.name, data.profilePhoto)
+            .then(() => {
+              console.log("user profile info updated");
+              const savedUser = {
+                name: data.name,
+                email: data.email,
+                profilePhoto: data.profilePhoto,
+                role: 'student'
+              };
+
+              fetch("http://localhost:5000/users", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(savedUser),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.insertedId) {
+                    toast.success("Welcome to Fluent Friends territory");
+                    navigate(from, { replace: true });
+                  }
+                });
+            })
+            .catch((error) => console.log(error.message));
         })
         .catch((error) => {
-          toast.error(error.message)
-          console.log(error.message)
+          toast.error(error.message);
+          console.log(error.message);
         });
     }
   };
@@ -36,7 +65,7 @@ const Register = () => {
       <Helmet>
         <title>Fluent Friends | Register Now!</title>
       </Helmet>
-      <Toaster/>
+      <Toaster />
       <div className="hero-content">
         <div className="card shadow-2xl">
           <div className="card-body w-full">
@@ -63,12 +92,18 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">Upload Profile Picture</span>
                 </label>
+                {/* TODO: ImgBB Upload */}
                 <input
+                  type="text"
+                  className="file-input file-input-sm w-full max-w-xs file-input-bordered file-input-primary"
+                  {...register("profilePhoto", { required: true })}
+                />
+                {/* <input
                   type="file"
                   className="file-input file-input-sm w-full max-w-xs file-input-bordered file-input-primary"
-                  {...register("profile", { required: true })}
-                />
-                {errors.profile && (
+                  {...register("profilePhoto", { required: true })}
+                /> */}
+                {errors.profilePhoto && (
                   <span className="text-error">This field is required</span>
                 )}
               </div>
@@ -96,15 +131,20 @@ const Register = () => {
                   type="text"
                   placeholder="password"
                   className="input input-bordered"
-                  {...register("password", { 
-                    required: true, 
-                    pattern:  /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{6,}/  })}
+                  {...register("password", {
+                    required: true,
+                    // eslint-disable-next-line no-useless-escape
+                    pattern: /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{6,}/,
+                  })}
                 />
                 {errors.password && (
                   <span className="text-error">This field is required</span>
                 )}
-                {errors?.password?.type === 'pattern' && (
-                  <span className="text-error">Total 6 character include 1 Uppercase, 1 Number & 1 Special character like (-,&%*)</span>
+                {errors?.password?.type === "pattern" && (
+                  <span className="text-error">
+                    Total 6 character include 1 Uppercase, 1 Number & 1 Special
+                    character like (-,&%*)
+                  </span>
                 )}
               </div>
 

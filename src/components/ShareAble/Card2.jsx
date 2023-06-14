@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const Card2 = ({ data }) => {
   return (
     <div className="card w-96 bg-base-300 shadow-xl">
@@ -14,7 +15,6 @@ const Card2 = ({ data }) => {
           <p>Age: {data.age}</p>
           <p>Classes: {data.classes_number}</p>
         </div>
-        
       </div>
     </div>
   );
