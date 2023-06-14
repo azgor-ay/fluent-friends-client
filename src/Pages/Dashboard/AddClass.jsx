@@ -16,9 +16,7 @@ export default function AddClass() {
   } = useForm();
   const onSubmit = (data) => {
     const { name, img, price, available_seats } = data;
-    console.log(data);
 
-    console.log(img[0]);
     const formData = new FormData();
     formData.append("image", img[0]);
 
@@ -28,7 +26,6 @@ export default function AddClass() {
     })
       .then((res) => res.json())
       .then((imgResponse) => {
-        console.log(imgResponse);
         if (imgResponse.success) {
           const imgURL = imgResponse.data.display_url;
           const newClass = {
@@ -41,10 +38,8 @@ export default function AddClass() {
             enrolled_students: 0,
             status: "pending",
           };
-          console.log(newClass);
           axiosSecure.post('/classes', newClass)
           .then(data => {
-            console.log('data after post new class', data.data);
             if(data.data.insertedId){
                 toast.success('New Class Added Successfully')
             }

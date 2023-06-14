@@ -4,9 +4,6 @@ const SelectedClasses = () => {
     <div>
       <h1 className="page-heading">My Selected Classes</h1>
       <Table></Table>
-      {/* {
-        data.map((c, index) => <Card key={index} data={data}></Card>)
-      } */}
     </div>
   );
 };

@@ -3,10 +3,17 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Toaster, toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 /* eslint-disable react/prop-types */
 const Card = ({ data }) => {
+  // TODO: Make the select btn disable on admin or instructor
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+  console.log(isAdmin, isInstructor);
   console.log(data);
+
   const {
     _id,
     name,
@@ -30,7 +37,7 @@ const Card = ({ data }) => {
         name,
         instructor,
         price,
-        email: user.email
+        email: user.email,
       };
       fetch("http://localhost:5000/selectedClasses", {
         method: "POST",
@@ -64,8 +71,12 @@ const Card = ({ data }) => {
   };
 
   return (
-    <div className="card w-96 bg-white text-black shadow-xl">
-      <Toaster/>  
+    <div
+      className={`card w-96 bg-white text-black shadow-xl
+    ${available_seats < 1 && "bg-error"}
+    `}
+    >
+      <Toaster />
       <figure className="p-6">
         <img className="h-16  object-cover" src={img} alt="Shoes" />
       </figure>
@@ -86,7 +97,15 @@ const Card = ({ data }) => {
           <p>Enrolled Students: {enrolled_students}</p>
         </div>
         <div className="card-actions justify-end"></div>
-        <button onClick={handleAddToLearningList} className="btn">
+
+        {/*   */}
+        <button
+          disabled={
+            available_seats < 1 || isAdmin || isInstructor ? true : false
+          }
+          onClick={handleAddToLearningList}
+          className="btn"
+        >
           Add to Learning List
         </button>
       </div>

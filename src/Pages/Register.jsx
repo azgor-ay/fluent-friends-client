@@ -17,7 +17,6 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     if (data?.password !== data?.conPassword) {
       toast.error("Password did'nt matched!");
       console.log("not matched");

@@ -5,7 +5,6 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
   const navigate = useNavigate();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "synthwave"
@@ -27,8 +26,7 @@ const NavBar = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate("/");
       })
       .catch((error) => console.log(error.message));

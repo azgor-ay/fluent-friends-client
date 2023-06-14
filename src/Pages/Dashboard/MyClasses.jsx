@@ -6,7 +6,6 @@ import { Toaster, toast } from "react-hot-toast";
 const MyClasses = () => {
   const [myAddedClasses, refetch] = useInstructorsAddedClasses();
   const [axiosSecure] = useAxiosSecure()
-  console.log(myAddedClasses);
   const handleDelete = (id) =>{
     axiosSecure.delete(`/classes/${id}`)
     .then(res=> {

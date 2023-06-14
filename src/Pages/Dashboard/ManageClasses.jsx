@@ -10,7 +10,6 @@ const ManageClasses = () => {
   });
 
   const handleMakeDenied = (id) => {
-    console.log(id);
     fetch(`http://localhost:5000/classes/denied/${id}`, {
       method: "PATCH",
     })
@@ -58,7 +57,7 @@ const ManageClasses = () => {
             <th>#</th>
             <th>Class/Course</th>
             <th>Price</th>
-            <th>Students</th>
+            <th>Enrolled Students</th>
             <th>Current Status</th>
             <th>Actions</th>
           </tr>
@@ -84,15 +83,12 @@ const ManageClasses = () => {
                 </div>
               </td>
               <td className="text-right">${c.price}</td>
+              <td className="text-right">{c.enrolled_students}</td>
               <td
                 className={`uppercase 
                 ${c.status === "pending" && "text-error"}
                 ${c.status === "denied" && "text-accent"}
-                ${c.status === "approved" && "text-success font-extrabold"}
-                
-
-                
-                `}
+                ${c.status === "approved" && "text-success font-extrabold"}`}
               >
                 {c.status}
               </td>

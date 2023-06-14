@@ -10,11 +10,9 @@ const useInstructorsAddedClasses = () => {
     queryKey: ["myAddedClasses", user?.email],
     queryFn: async () => {
       const res = await axiosSecure(`classes?email=${user?.email}`);
-      console.log('res from axios', res);
       return res.data;
     },
   });
-  console.log(myAddedClasses);
   return [myAddedClasses, refetch];
 };
 

@@ -3,6 +3,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useSelectedClasses from "../../hooks/useSelectedClasses";
+import { Link } from "react-router-dom";
 
 
 const Table = () => {
@@ -82,7 +83,10 @@ const Table = () => {
             </td>
             <td className="text-right">${c.price}</td>
             <th>
-              <button className="btn btn-xs"> Enroll Now</button> - or - {" "}
+              <Link to={`/dashboard/payment/${c._id}`}>
+              <button className="btn btn-xs"> Enroll Now</button>
+              </Link> 
+              <span className="px-4">- or -</span>
               <button onClick={()=>handleDelete(c._id)} className="btn btn-error btn-xs"> <FaTrash/> Delete</button>
             </th>
           </tr>)}
