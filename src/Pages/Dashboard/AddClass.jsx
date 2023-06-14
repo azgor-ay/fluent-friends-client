@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function AddClass() {
-    const { user } = useContext(AuthContext);
+    const [axiosSecure] = useAxiosSecure()
+  const { user } = useContext(AuthContext);
   const image_hosting_token = import.meta.env.VITE_IMG_UPLOAD_TOKEN;
   const image_hosted_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
   const {
@@ -28,25 +31,31 @@ export default function AddClass() {
         console.log(imgResponse);
         if (imgResponse.success) {
           const imgURL = imgResponse.data.display_url;
-          const toDb = {
-            img : imgURL,
+          const newClass = {
+            img: imgURL,
             name,
-            instructor: user?.name,
+            instructor: user?.displayName,
             email: user?.email,
             available_seats,
             price,
             enrolled_students: 0,
             status: "pending",
           };
-          console.log(toDb);
-          
+          console.log(newClass);
+          axiosSecure.post('/classes', newClass)
+          .then(data => {
+            console.log('data after post new class', data.data);
+            if(data.data.insertedId){
+                toast.success('New Class Added Successfully')
+            }
+          })
         }
       });
-      
   };
 
   return (
     <div className="bg-base-200 px-12 pb-12 rounded-3xl">
+        <Toaster/>
       <h1 className="page-heading">Add new class for Students</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-8">
