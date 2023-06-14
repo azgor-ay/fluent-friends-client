@@ -4,21 +4,26 @@ import Logo from "../components/ShareAble/Logo";
 import {
   FaChalkboardTeacher,
   FaHome,
+  FaPlus,
   FaUserFriends,
   FaUserGraduate,
   FaUsers,
+  FaWallet,
 } from "react-icons/fa";
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 const Dashboard = () => {
-  const [isAdmin] = useAdmin()
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+
   return (
     <div className="drawer lg:drawer-open">
       <Helmet>
         <title>Fluent Friends| Student Dashboard</title>
       </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col items-center justify-start">
         <div>
           <Outlet></Outlet>
         </div>
@@ -37,42 +42,99 @@ const Dashboard = () => {
             <div className="pb-12">
               <Logo></Logo>
             </div>
-            <li>
-              <NavLink
-                to="/dashboard/selectedClasses"
-                className={({ isActive }) =>
-                  isActive ? "ActiveDashNav" : "DashNav"
-                }
-              >
-                <BsFillBookmarkStarFill /> My Selected Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/enrolledClasses"
-                className={({ isActive }) =>
-                  isActive ? "ActiveDashNav" : "DashNav"
-                }
-              >
-                <FaChalkboardTeacher /> My Enrolled Classes
-              </NavLink>
-            </li>
+            {
+              !isAdmin && !isInstructor &&
+              <>
+              <li>
+                <NavLink
+                  to="/dashboard/selectedClasses"
+                  className={({ isActive }) =>
+                    isActive ? "ActiveDashNav" : "DashNav"
+                  }
+                >
+                  <BsFillBookmarkStarFill /> My Selected Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/enrolledClasses"
+                  className={({ isActive }) =>
+                    isActive ? "ActiveDashNav" : "DashNav"
+                  }
+                >
+                  <FaChalkboardTeacher /> My Enrolled Classes
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/dashboard/paymentHistory"
+                  className={({ isActive }) =>
+                    isActive ? "ActiveDashNav" : "DashNav"
+                  }
+                >
+                  <FaWallet /> My Payment History
+                </NavLink>
+              </li>
+            </>
+            }
+
+            {/* /dashboard/payment */}
+
+            {/* Instructors Links */}
+            {isInstructor && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/addClass"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    <FaPlus /> Add new Class
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/myClasses"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    📚 My Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* Instructors Links */}
 
             {/* Admin Links */}
+            {isAdmin && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/manageUsers"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    <FaUsers /> Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manageClasses"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    <FaUsers /> Manage Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
 
-            {isAdmin && <li>
-              <NavLink
-                to="/dashboard/manageUsers"
-                className={({ isActive }) =>
-                  isActive ? "ActiveDashNav" : "DashNav"
-                }
-              >
-                <FaUsers /> Manage Users
-              </NavLink>
-            </li>}
-
-             {/* Admin Links */}
-
+            {/* Admin Links */}
           </div>
           <hr />
           <br /> <br />

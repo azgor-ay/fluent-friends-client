@@ -57,11 +57,12 @@ const AuthProvider = ({ children }) => {
         .then(data => {
           console.log(data.data);
           localStorage.setItem('fluent-friends-jwt-token', data.data)
+          setLoading(false);
         })
       } else{
         localStorage.removeItem('fluent-friends-jwt-token')
       }
-      setLoading(false);
+  
     });
     return () => {
       return unsubscribe();

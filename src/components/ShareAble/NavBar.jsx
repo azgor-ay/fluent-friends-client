@@ -6,7 +6,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   console.log(user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "synthwave"
   );
@@ -25,14 +25,14 @@ const NavBar = () => {
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
 
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     logOut()
-    .then((result) => {
-      console.log(result.user);
-      navigate("/");
-    })
-    .catch((error) => console.log(error.message));
-  }
+      .then((result) => {
+        console.log(result.user);
+        navigate("/");
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div className="drawer rounded-3xl bg-base-100 text-base-content">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -92,16 +92,18 @@ const NavBar = () => {
                   classes
                 </NavLink>
               </li>
-               <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "active" : "default"
-                  }
-                  to="/dashboard"
-                >
-                  Dashboard
-                </NavLink>
-              </li>
+              {user && (
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                    to="/dashboard"
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
           <div>
