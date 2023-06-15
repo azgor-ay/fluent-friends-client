@@ -22,7 +22,7 @@ const UpcomingCourse = () => {
   });
 
   return (
-    <div className="p-12">
+    <div className="p-12 hidden lg:block">
     <h1 className="page-heading">Our upcoming <span className="text-primary">{text}</span>  <Cursor cursorColor="primary" /></h1>
       <Swiper
         effect={"coverflow"}
@@ -43,8 +43,8 @@ const UpcomingCourse = () => {
         {data.map((d, index) => (
           <SwiperSlide key={index} className="text-center">
             <img className="" src={d.flags.png} />
-            <h2 className="text-base-content font-semibold text-2xl">{`${d.name.common}'s local language`}</h2>
-            <h4 className="text-base-content font-extralight text-2xl">{d.continents}</h4>
+            <h2 className="text-base-content font-semibold text-sm lg:text-2xl">{`${d.name.common}'s local language`}</h2>
+            <h4 className="text-base-content font-extralight text-xs lg:text-2xl">{d.continents}</h4>
           </SwiperSlide>
         ))}
       </Swiper>

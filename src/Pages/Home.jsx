@@ -11,15 +11,15 @@ const Home = () => {
     <div>
       <Helmet>
         <title>
-        Fluent Friends| Home
+        Fluent Friends | Home
         </title>
       </Helmet>
       <HomeSlider></HomeSlider>
       <PopularClasses></PopularClasses>
       <PopularInstructors></PopularInstructors>
-      <ApplyCard></ApplyCard>
       <CountDown></CountDown>    
       <UpcomingCourse></UpcomingCourse>
+      <ApplyCard></ApplyCard>
     </div>
   );
 };

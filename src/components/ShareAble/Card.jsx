@@ -12,7 +12,6 @@ const Card = ({ data }) => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   console.log(isAdmin, isInstructor);
-  console.log(data);
 
   const {
     _id,
@@ -24,6 +23,7 @@ const Card = ({ data }) => {
     available_seats,
     enrolled_students,
   } = data;
+  console.log(available_seats);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -72,8 +72,8 @@ const Card = ({ data }) => {
 
   return (
     <div
-      className={`card w-96 bg-white text-black shadow-xl
-    ${available_seats < 1 && "bg-error"}
+      className={`card w-96 text-black shadow-xl
+    ${available_seats < 1 ? "bg-error" : "bg-white"}
     `}
     >
       <Toaster />

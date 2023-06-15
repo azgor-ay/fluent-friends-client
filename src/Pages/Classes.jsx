@@ -12,7 +12,7 @@ const Classes = () => {
                 </title>
             </Helmet>
             <h1 className="page-heading">Our <span className="text-primary">classes</span></h1>
-            <div className="grid grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-8">
                 {
                     data.map(d => <Card
                     key={d.name}

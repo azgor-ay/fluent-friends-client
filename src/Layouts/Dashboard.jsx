@@ -10,15 +10,14 @@ import {
   FaUsersCog,
   FaWallet,
 } from "react-icons/fa";
-import {SiGoogleclassroom} from 'react-icons/si'
-import {BsCollectionFill} from 'react-icons/bs'
+import { SiGoogleclassroom } from "react-icons/si";
+import { BsCollectionFill } from "react-icons/bs";
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-
   return (
     <div className="drawer lg:drawer-open">
       <Helmet>
@@ -44,42 +43,41 @@ const Dashboard = () => {
             <div className="pb-12">
               <Logo></Logo>
             </div>
-            {
-              !isAdmin && !isInstructor &&
+            {!isAdmin && !isInstructor && (
               <>
-              <li>
-                <NavLink
-                  to="/dashboard/selectedClasses"
-                  className={({ isActive }) =>
-                    isActive ? "ActiveDashNav" : "DashNav"
-                  }
-                >
-                  <BsFillBookmarkStarFill /> My Selected Classes
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/enrolledClasses"
-                  className={({ isActive }) =>
-                    isActive ? "ActiveDashNav" : "DashNav"
-                  }
-                >
-                  <FaChalkboardTeacher /> My Enrolled Classes
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/selectedClasses"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    <BsFillBookmarkStarFill /> My Selected Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/enrolledClasses"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    <FaChalkboardTeacher /> My Enrolled Classes
+                  </NavLink>
+                </li>
 
-              <li>
-                <NavLink
-                  to="/dashboard/paymentHistory"
-                  className={({ isActive }) =>
-                    isActive ? "ActiveDashNav" : "DashNav"
-                  }
-                >
-                  <FaWallet /> My Payment History
-                </NavLink>
-              </li>
-            </>
-            }
+                <li>
+                  <NavLink
+                    to="/dashboard/paymentHistory"
+                    className={({ isActive }) =>
+                      isActive ? "ActiveDashNav" : "DashNav"
+                    }
+                  >
+                    <FaWallet /> My Payment History
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* /dashboard/payment */}
 
@@ -103,7 +101,7 @@ const Dashboard = () => {
                       isActive ? "ActiveDashNav" : "DashNav"
                     }
                   >
-                    <BsCollectionFill/> My Classes
+                    <BsCollectionFill /> My Classes
                   </NavLink>
                 </li>
               </>
@@ -120,7 +118,7 @@ const Dashboard = () => {
                       isActive ? "ActiveDashNav" : "DashNav"
                     }
                   >
-                    <FaUsersCog/>
+                    <FaUsersCog />
                     Manage Users
                   </NavLink>
                 </li>
@@ -131,7 +129,7 @@ const Dashboard = () => {
                       isActive ? "ActiveDashNav" : "DashNav"
                     }
                   >
-                    <SiGoogleclassroom/>
+                    <SiGoogleclassroom />
                     Manage Classes
                   </NavLink>
                 </li>

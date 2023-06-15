@@ -2,10 +2,10 @@ import Logo from "./Logo";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-10 bg-black mt-12 text-primary-content">
+    <footer className="footer footer-center p-10 bg-black text-white lg:mt-12">
   <div>
     <Logo></Logo>
-    <p className="font-bold">
+    <p className="lg:font-bold">
       Providing Awesome Language Learning Classes
     </p> 
     <p>Copyright © 2023 - All right reserved</p>

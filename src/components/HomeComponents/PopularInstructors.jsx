@@ -16,7 +16,7 @@ const PopularInstructors = () => {
         Explore our <span className="text-primary">{text}</span>{" "}
         <Cursor cursorColor="primary" />
       </h1>
-      <div className="grid grid-cols-3 gap-12 justify-center">
+      <div className="grid lg:grid-cols-3 gap-12 justify-center p-6">
         {instructors.map((slide, index) => (
             <InstructorAnimeCard key={index} slide={slide}></InstructorAnimeCard>
         ))}

@@ -25,7 +25,7 @@ const HomeSlider = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {classes.map((slide) => (
+        {classes?.map((slide) => (
           <SwiperSlide key={slide.name} className="min-h-screen">
             <BannerCard slide={slide}></BannerCard>
           </SwiperSlide>

@@ -5,7 +5,7 @@ import useInstructors from "../hooks/useInstructors";
 const Instructors = () => {
   const data = useInstructors()
   return (
-    <div>
+    <div className="mx-auto">
       <Helmet>
         <title>
         Fluent Friends| Instructors
@@ -14,7 +14,7 @@ const Instructors = () => {
       <h1 className="page-heading">
         our <span className="text-primary">Instructors</span>
       </h1>
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-8">
         {data.map((d) => (
           <Card2 key={d.name} data={d}></Card2>
         ))}

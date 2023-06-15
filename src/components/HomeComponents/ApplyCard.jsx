@@ -2,12 +2,12 @@ import Tilt from 'react-parallax-tilt';
 const ApplyCard = () => {
   return (
     <Tilt>
-        <div className="bg-[url('https://i.ibb.co/M5nN8Dr/bg.png')] p-12 mt-28 flex justify-between items-center px-32 text-white">
+        <div className="bg-[url('https://i.ibb.co/M5nN8Dr/bg.png')] p-12 lg:mt-28 flex justify-between items-center lg:px-32 text-white">
       <div className="space-y-4">
-        <h1 className="text-6xl font-extrabold">Start Learning</h1>
-        <p>With your friends explore awesome curriculum to visit the whole world</p>
+        <h1 className="text-3xl lg:text-6xl font-extrabold">Start Learning</h1>
+        <p className='sm:text-xs'>With your friends explore awesome curriculum to visit the whole world</p>
       </div>
-      <button className="btn btn-primary">Apply Now</button>
+      <button className="btn btn-primary">Our Classes</button>
     </div>
     </Tilt>
   );
