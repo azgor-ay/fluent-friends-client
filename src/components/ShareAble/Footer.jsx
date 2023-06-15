@@ -6,7 +6,7 @@ const Footer = () => {
   <div>
     <Logo></Logo>
     <p className="lg:font-bold">
-      Providing Awesome Language Learning Classes
+      Provide Awesome Language Learning Classes
     </p> 
     <p>Copyright © 2023 - All right reserved</p>
   </div> 

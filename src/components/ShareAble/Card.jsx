@@ -5,10 +5,10 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 /* eslint-disable react/prop-types */
 const Card = ({ data }) => {
-  // TODO: Make the select btn disable on admin or instructor
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   console.log(isAdmin, isInstructor);
@@ -26,7 +26,7 @@ const Card = ({ data }) => {
   console.log(available_seats);
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [axiosSecure] = useAxiosSecure()
   const { user } = useContext(AuthContext);
   const handleAddToLearningList = () => {
     if (user) {
@@ -39,16 +39,9 @@ const Card = ({ data }) => {
         price,
         email: user.email,
       };
-      fetch("http://localhost:5000/selectedClasses", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(selectedClass),
-      })
-        .then((res) => res.json())
+      axiosSecure.post("/selectedClasses", selectedClass)
         .then((data) => {
-          if (data.insertedId) {
+          if (data.data.insertedId) {
             toast.success("Added to Learning List || Check Dashboard");
           }
         });
@@ -78,7 +71,7 @@ const Card = ({ data }) => {
     >
       <Toaster />
       <figure className="p-6">
-        <img className="h-16  object-cover" src={img} alt="Shoes" />
+        <img className="h-16 object-cover" src={img} alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
