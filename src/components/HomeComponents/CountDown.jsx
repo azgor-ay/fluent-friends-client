@@ -3,14 +3,16 @@ import CountUp from "react-countup";
 import { FaUserFriends, FaUserGraduate } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import ScrollTrigger from "react-scroll-trigger";
-import useInstructor from "../../hooks/useInstructor";
 import useClasses from "../../hooks/useClasses";
+import useInstructors from "../../hooks/useInstructors";
+import useStudents from "../../hooks/useStudents";
 
 const CountDown = () => {
   const [countOn, setCountOn] = useState(false);
-//   const teacher = useInstructor()
-//   const student = 
-//   const classes = useClasses()
+  const teachers = useInstructors()
+  const students = useStudents()
+  const classes = useClasses()
+
   return (
     <ScrollTrigger
       onEnter={() => setCountOn(true)}
@@ -21,7 +23,7 @@ const CountDown = () => {
           <div className="flex justify-evenly items-center">
             <div className="text-center">
               <h1 className="text-2xl">
-                <CountUp start={0} end={1000} duration={2} delay={0} />
+                <CountUp start={0} end={teachers?.length} duration={2} delay={0} />
               </h1>
               <span>
                 <FaUserGraduate className="inline text-3xl" /> <br />
@@ -30,7 +32,7 @@ const CountDown = () => {
             </div>
             <div className="text-center">
               <h1 className="text-2xl">
-                <CountUp start={0} end={1000} duration={2} delay={0} />
+                <CountUp start={0} end={students?.length} duration={2} delay={0} />
               </h1>
               <span>
                 <FaUserFriends className="inline text-3xl" /> <br />
@@ -39,7 +41,7 @@ const CountDown = () => {
             </div>
             <div className="text-center">
               <h1 className="text-2xl">
-                <CountUp start={0} end={1000} duration={2} delay={0} />
+                <CountUp start={0} end={classes?.length} duration={2} delay={0} />
               </h1>
               <span>
                 <SiGoogleclassroom className="inline text-3xl" /> <br />

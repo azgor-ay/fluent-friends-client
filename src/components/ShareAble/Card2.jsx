@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
+import {FaUserGraduate} from 'react-icons/fa'
 const Card2 = ({ data }) => {
+  const {profilePhoto, name, email, role} = data
   return (
     <div className="card w-96 bg-base-300 shadow-xl">
       <figure>
-        <img src={data.img} alt="instructor" />
+        <img className='w-full h-60 object-cover object-center' src={profilePhoto} alt="instructor" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {data.name}
-          <div className="badge badge-secondary">Available{}</div>
+          {name}
+          <div className="badge badge-secondary uppercase"> <FaUserGraduate className='inline mr-1'/> {role}</div>
         </h2>
         <div>
-          <p>Email: {data.email}</p>
-          <p>Age: {data.age}</p>
-          <p>Classes: {data.classes_number}</p>
+          <p>Email: {email}</p>
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ import AddClass from "../Pages/Dashboard/AddClass";
 import MyClasses from "../Pages/Dashboard/MyClasses";
 import AdminOnly from "./AdminOnly";
 import ManageClasses from "../Pages/Dashboard/ManageClasses";
+import DashboardWelcome from "../components/ShareAble/DashboardWelcome";
 
 const router = createBrowserRouter([
   {
@@ -52,10 +53,7 @@ const router = createBrowserRouter([
 
       {
         path: "/dashboard",
-        element: <>
-        <h1 className="page-heading">🌟 Welcome to <span className="text-primary">Fluent</span> Friend 🌟</h1>
-        <p className="px-24 text-xl text-center text-accent">Unlock your language potential with personalized courses and interactive practice. Embark on an exciting journey to become a confident communicator.</p>
-        </>
+        element: <DashboardWelcome></DashboardWelcome>
       },
       // Student Links
       {

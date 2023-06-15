@@ -13,6 +13,10 @@
     @apply text-5xl font-semibold uppercase text-center py-12 mt-12; 
 }
 
+.dash-welcome-heading{
+    @apply font-extrabold uppercase text-center py-12 mt-12; 
+}
+
 .default{
  @apply text-xl font-semibold mx-2
 }

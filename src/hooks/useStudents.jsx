@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-const useClasses = () => {
+const useStudents = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/classes/approved")
+    fetch("http://localhost:5000/students")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -11,4 +11,4 @@ const useClasses = () => {
   return data;
 };
 
-export default useClasses;
+export default useStudents;

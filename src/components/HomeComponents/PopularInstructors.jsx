@@ -1,10 +1,10 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import AnimationCard from "../ShareAble/AnimationCard";
 import useInstructors from "../../hooks/useInstructors";
 import InstructorAnimeCard from "../ShareAble/InstructorAnimeCard";
 
 const PopularInstructors = () => {
-  const instructors = useInstructors()
+  const data = useInstructors()
+  const instructors = data.slice(0, 6)
   const [text] = useTypewriter({
     words: ["Popular Instructors", "Best instructor's"],
     loop: Infinity,
