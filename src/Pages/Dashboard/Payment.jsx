@@ -6,17 +6,18 @@ import { useEffect, useState } from "react";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
+
   const params = useParams();
   const id = params?.id;
-    const [data, setData] = useState([])
+  console.log(id);
+    const [price, setPrice] = useState(0)
     useEffect(()=>{
         fetch(`http://localhost:5000/classes/${id}`)
         .then(res => res.json())
-        .then(data => setData(data))
+        .then(data => setPrice(data.result.price))
     },[id])
-    console.log(data);
 
-    const price = data.price || 100;
+
   return (
     <div>
       <h1 className="page-heading">Enroll Now!</h1>

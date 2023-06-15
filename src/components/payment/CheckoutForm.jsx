@@ -1,23 +1,42 @@
+/* eslint-disable react/prop-types */
+import {
+  CardElement,
+  useCartElementState,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { useContext, useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-import { CardElement, useCartElementState, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
-
-const CheckoutForm = ({price}) => {
+const CheckoutForm = ({ price }) => {
   const stripe = useStripe();
   const elements = useCartElementState();
   const [cardError, setCardError] = useState(" ");
+  const [axiosSecure] = useAxiosSecure();
+  const [clientSecret, setClientSecret] = useState("");
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (price) {
+      axiosSecure.post("/create-payment-intent", { price })
+      .then((res) => {
+        console.log(res.data.clientSecret);
+        setClientSecret(res.data.clientSecret);
+      });
+    }
+  }, [price]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(!stripe || !elements){
-        return;
+    if (!stripe || !elements) {
+      return;
     }
-    
-    const card = elements.getElement(CardElement)
-    if(card === null){
-        return;
+
+    const card = elements.getElement(CardElement);
+    if (card === null) {
+      return;
     }
- 
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -29,7 +48,22 @@ const CheckoutForm = ({price}) => {
     } else {
       setCardError(" ");
       console.log("payment method", paymentMethod);
+    } 
+
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
+    if (confirmError) {
+      console.log(confirmError);
     }
+    console.log(paymentIntent);
   };
   return (
     <div className="w-full mx-auto text-base-content">
@@ -53,7 +87,7 @@ const CheckoutForm = ({price}) => {
         <button
           className="btn btn-primary btn-sm mt-8"
           type="submit"
-          disabled={!stripe}
+          disabled={!stripe || !clientSecret}
         >
           Pay
         </button>

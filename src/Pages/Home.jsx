@@ -4,6 +4,7 @@ import HomeSlider from "../components/HomeComponents/HomeSlider";
 import PopularClasses from "../components/HomeComponents/PopularClasses";
 import UpcomingCourse from "../components/HomeComponents/UpcomingCourse";
 import PopularInstructors from "../components/HomeComponents/PopularInstructors";
+import CountDown from "../components/HomeComponents/CountDown";
 
 const Home = () => {
   return (
@@ -17,11 +18,8 @@ const Home = () => {
       <PopularClasses></PopularClasses>
       <PopularInstructors></PopularInstructors>
       <ApplyCard></ApplyCard>
+      <CountDown></CountDown>    
       <UpcomingCourse></UpcomingCourse>
-
-      {/* TODO */}
-      https://www.youtube.com/watch?v=NWyWoW61B3I
-      
     </div>
   );
 };

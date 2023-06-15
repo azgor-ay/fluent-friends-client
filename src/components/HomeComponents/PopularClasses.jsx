@@ -3,12 +3,15 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 import AnimationCard from "../ShareAble/AnimationCard";
 
 const PopularClasses = () => {
-  const classes = useClasses();
+  const data = useClasses();
+  const popularClasses = data.filter(d => d.enrolled_students > 5)
+   
   const [text] = useTypewriter({
     words: ["Popular Classes", "Best instructor's Classes"],
     loop: Infinity,
     onLoopDone: () => console.log(`loop completed after 3 runs.`),
   });
+  
   return (
     <div>
       <h1 className="page-heading">
@@ -16,7 +19,7 @@ const PopularClasses = () => {
         <Cursor cursorColor="primary" />
       </h1>
       <div className="grid grid-cols-3 gap-12 justify-center">
-        {classes.map((slide, index) => (
+        {popularClasses.map((slide, index) => (
           <AnimationCard key={index} slide={slide}></AnimationCard>
         ))}
       </div>

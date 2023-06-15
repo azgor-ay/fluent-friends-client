@@ -7,9 +7,11 @@ import {
   FaPlus,
   FaUserFriends,
   FaUserGraduate,
-  FaUsers,
+  FaUsersCog,
   FaWallet,
 } from "react-icons/fa";
+import {SiGoogleclassroom} from 'react-icons/si'
+import {BsCollectionFill} from 'react-icons/bs'
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
@@ -101,7 +103,7 @@ const Dashboard = () => {
                       isActive ? "ActiveDashNav" : "DashNav"
                     }
                   >
-                    📚 My Classes
+                    <BsCollectionFill/> My Classes
                   </NavLink>
                 </li>
               </>
@@ -118,7 +120,8 @@ const Dashboard = () => {
                       isActive ? "ActiveDashNav" : "DashNav"
                     }
                   >
-                    <FaUsers /> Manage Users
+                    <FaUsersCog/>
+                    Manage Users
                   </NavLink>
                 </li>
                 <li>
@@ -128,7 +131,8 @@ const Dashboard = () => {
                       isActive ? "ActiveDashNav" : "DashNav"
                     }
                   >
-                    <FaUsers /> Manage Classes
+                    <SiGoogleclassroom/>
+                    Manage Classes
                   </NavLink>
                 </li>
               </>

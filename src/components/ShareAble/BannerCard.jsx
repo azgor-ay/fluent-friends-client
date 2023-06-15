@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 const BannerCard = ({ slide }) => {
-  const { name, flag, price, available_seats, enrolled_students, instructor } = slide;
+  const { name, flag, img, price, available_seats, enrolled_students, instructor } = slide;
   return (
     <div
       className="hero min-h-screen rounded-3xl bg-base-200"
@@ -13,7 +13,7 @@ const BannerCard = ({ slide }) => {
       <div className="hero-content text-neutral-content p-24">
         <div className="grid grid-cols-2 gap-12 items-center text-right">
           <div className="flex flex-col justify-center items-center gap-5">
-            <img src={flag} className="w-96" />
+            <img src={flag?flag:img} className="w-96" />
             <h1 className="text-4xl font-semibold">{name}</h1>
           </div>
 

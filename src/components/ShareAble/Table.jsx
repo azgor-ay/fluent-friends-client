@@ -83,7 +83,7 @@ const Table = () => {
             </td>
             <td className="text-right">${c.price}</td>
             <th>
-              <Link to={`/dashboard/payment/${c._id}`}>
+              <Link to={`/dashboard/payment/${c.classId}`}>
               <button className="btn btn-xs"> Enroll Now</button>
               </Link> 
               <span className="px-4">- or -</span>
