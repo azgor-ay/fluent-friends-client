@@ -87,6 +87,11 @@ const Table = () => {
           </tr>)}
         </tbody>
       </table>
+      {selectedClass.length === 0 && 
+        <div className="text-center">
+          <h1 className="page-heading">Empty Selected Classes</h1>
+          <Link to="/classes"><button className="btn btn-primary">Explore Classes</button></Link>
+          </div>}
     </div>
   );
 };

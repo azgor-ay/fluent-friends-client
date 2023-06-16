@@ -1,4 +1,5 @@
 import Tilt from 'react-parallax-tilt';
+import { Link } from 'react-router-dom';
 const ApplyCard = () => {
   return (
     <Tilt>
@@ -7,7 +8,7 @@ const ApplyCard = () => {
         <h1 className="text-3xl lg:text-6xl font-extrabold">Start Learning</h1>
         <p className='sm:text-xs'>With your friends explore awesome curriculum to visit the whole world</p>
       </div>
-      <button className="btn btn-primary">Our Classes</button>
+      <Link to="/classes"><button className="btn btn-primary">Enroll Now</button></Link>
     </div>
     </Tilt>
   );
