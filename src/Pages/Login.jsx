@@ -1,17 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import world from "../assets/world.json";
 import Lottie from "lottie-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import SocialLogin from "../components/ShareAble/SocialLogin";
 import { Toaster, toast } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
-  const location = useLocation()
-  const from = location?.state?.from?.pathname || '/'
-  const navigate = useNavigate()
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const [showPass, setPassShow] = useState(false);
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,7 +23,7 @@ const Login = () => {
       // eslint-disable-next-line no-unused-vars
       .then((result) => {
         toast.success("Logged in Successfully");
-        navigate(from, {replace: true})
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -60,11 +62,21 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type={showPass? "text": 'password'}
                   placeholder="password"
                   name="password"
                   className="input input-bordered"
                 />
+                <span
+                  onClick={() => setPassShow(!showPass)}
+                  className="relative left-64 ml-4 bottom-9 cursor-pointer w-5"
+                >
+                  {showPass ? (
+                    <FaEye className="inline" />
+                  ) : (
+                    <FaEyeSlash className="inline" />
+                  )}
+                </span>
               </div>
               <div className="form-control mt-6">
                 <input

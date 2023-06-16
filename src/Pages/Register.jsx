@@ -2,12 +2,15 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import SocialLogin from "../components/ShareAble/SocialLogin";
 import { Toaster, toast } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Register = () => {
   const { registerUser, updateUserProfile } = useContext(AuthContext);
+  const [showPass, setShowPass] = useState(false);
+  const [showConPass, setShowConPass] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
@@ -135,7 +138,7 @@ const Register = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type={showPass ? "text" : "password"}
                   placeholder="password"
                   className="input input-bordered"
                   {...register("password", {
@@ -144,6 +147,16 @@ const Register = () => {
                     pattern: /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{6,}/,
                   })}
                 />
+                <span
+                  onClick={() => setShowPass(!showPass)}
+                  className="relative left-64 ml-8 bottom-9 cursor-pointer w-5"
+                >
+                  {showPass ? (
+                    <FaEye className="inline" />
+                  ) : (
+                    <FaEyeSlash className="inline" />
+                  )}
+                </span>
                 {errors.password && (
                   <span className="text-error">This field is required</span>
                 )}
@@ -160,11 +173,21 @@ const Register = () => {
                   <span className="label-text">Confirm Password</span>
                 </label>
                 <input
-                  type="text"
+                  type={showConPass ? "text" : "password"}
                   placeholder="Re-Type Password"
                   className="input input-bordered"
                   {...register("conPassword", { required: true })}
                 />
+                <span
+                  onClick={() => setShowConPass(!showConPass)}
+                  className="relative left-64 ml-8 bottom-9 cursor-pointer w-5"
+                >
+                  {showConPass ? (
+                    <FaEye className="inline" />
+                  ) : (
+                    <FaEyeSlash className="inline" />
+                  )}
+                </span>
                 {errors.password && (
                   <span className="text-error">This field is required</span>
                 )}
