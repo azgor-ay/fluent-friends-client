@@ -1,5 +1,6 @@
 import moment from "moment";
 import usePaymentsOrEnrolled from "../../hooks/usePaymentsOrEnrolled";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const [enrolledOrPayments] = usePaymentsOrEnrolled();
@@ -10,6 +11,9 @@ const PaymentHistory = () => {
   // date, enrolledClassInstructorName, enrolledClassName, price, studentName
   return (
     <div>
+      <Helmet>
+        <title>Fluent Friends || Payment History</title>
+      </Helmet>
       <h1 className="page-heading">Payment History</h1>
       <h1 className="text-3xl pb-6 font-semibold">You Totally Paid: - {parseFloat(totalPrice).toFixed(2)}</h1>
       <table className="table">

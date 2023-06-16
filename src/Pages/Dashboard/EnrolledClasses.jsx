@@ -1,11 +1,15 @@
 import moment from "moment/moment";
 import usePaymentsOrEnrolled from "../../hooks/usePaymentsOrEnrolled";
+import { Helmet } from "react-helmet-async";
 
 const EnrolledClasses = () => {
   const [enrolledOrPayments] = usePaymentsOrEnrolled();
   // date, enrolledClassInstructorName, enrolledClassName, price, studentName
   return (
     <div>
+      <Helmet>
+        <title>Fluent Friends || Enrolled Classes</title>
+      </Helmet>
       <h1 className="page-heading">
         Total Enrolled Classes:- {enrolledOrPayments.length}
       </h1>

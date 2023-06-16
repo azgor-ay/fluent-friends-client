@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Toaster, toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 export default function AddClass() {
     const [axiosSecure] = useAxiosSecure()
@@ -51,6 +52,9 @@ export default function AddClass() {
   return (
     <div className="bg-base-200 px-12 pb-12 rounded-3xl">
         <Toaster/>
+        <Helmet>
+        <title>Fluent Friends || Add A New Class</title>
+      </Helmet>
       <h1 className="page-heading">Add new class for Students</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-8">

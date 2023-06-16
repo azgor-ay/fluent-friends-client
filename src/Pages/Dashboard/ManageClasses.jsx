@@ -2,6 +2,7 @@ import { Toaster, toast } from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -62,6 +63,9 @@ const ManageClasses = () => {
   return (
     <div>
       <Toaster />
+      <Helmet>
+        <title>Fluent Friends || Manage Classes</title>
+      </Helmet>
       <table className="table">
         {/* head */}
         <thead>

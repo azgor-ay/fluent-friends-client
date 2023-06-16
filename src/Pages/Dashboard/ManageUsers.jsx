@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Toaster, toast } from "react-hot-toast";
 import { FaUser, FaUserGraduate, FaUserShield } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -41,6 +42,9 @@ const ManageUsers = () => {
     <div>
       <div className="overflow-x-auto">
         <Toaster />
+        <Helmet>
+          <title>Fluent Friends || Manage Users</title>
+        </Helmet>
         <table className="table">
           {/* head */}
           <thead>

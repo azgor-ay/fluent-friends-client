@@ -3,6 +3,7 @@ import useInstructorsAddedClasses from "../../hooks/useInstructorsAddedClasses";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Toaster, toast } from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyClasses = () => {
   const [myAddedClasses, refetch] = useInstructorsAddedClasses();
@@ -33,6 +34,9 @@ const MyClasses = () => {
   return (
     <div>
         <Toaster/>
+        <Helmet>
+        <title>Fluent Friends || My Classes</title>
+      </Helmet>
         <h1 className="page-heading">All the classes i added</h1>
       <table className="table">
         {/* head */}

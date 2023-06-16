@@ -4,6 +4,7 @@ import CheckoutForm from "../../components/payment/CheckoutForm";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
@@ -19,6 +20,9 @@ const Payment = () => {
   
   return (
     <div className="w-full">
+      <Helmet>
+        <title>Fluent Friends || Payment for Enrolment</title>
+      </Helmet>
       <h1 className="page-heading">Enroll Now!</h1>
       <Elements stripe={stripePromise}>
         <CheckoutForm
