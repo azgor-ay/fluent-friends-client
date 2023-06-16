@@ -11,7 +11,7 @@ const PaymentHistory = () => {
   return (
     <div>
       <h1 className="page-heading">Payment History</h1>
-      <h1 className="text-3xl pb-6 font-semibold">Your Total Paid: - {totalPrice}</h1>
+      <h1 className="text-3xl pb-6 font-semibold">You Totally Paid: - {parseFloat(totalPrice).toFixed(2)}</h1>
       <table className="table">
         {/* head */}
         <thead>

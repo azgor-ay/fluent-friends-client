@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if(currentUser){
-        axios.post('http://localhost:5000/jwt', {email: currentUser.email})
+        axios.post('https://fluent-friends-server.vercel.app/jwt', {email: currentUser.email})
         .then(data => {
           localStorage.setItem('fluent-friends-jwt-token', data.data)
           setLoading(false);

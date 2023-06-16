@@ -1,6 +1,7 @@
 import { Toaster, toast } from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -18,13 +19,35 @@ const ManageClasses = () => {
     });
   };
 
-  const handleMakeSuspend = (id) => {
-    axiosSecure.patch(`/classes/pending/${id}`).then((res) => {
-      refetch();
-      if (res.data.modifiedCount) {
-        toast.success("Class Suspended Successfully");
-      }
+  const handleSendFeedBack = async (id) => {
+    const { value: text } = await Swal.fire({
+      input: "textarea",
+      inputLabel: "Send your feedback to the instructor who created this class",
+      inputPlaceholder: "Type your feedback here...",
+      inputAttributes: {
+        "aria-label": "Type your feedback here",
+      },
+      showCancelButton: true,
+      confirmButtonColor: "black",
+      confirmButtonText: `🚀Send`,
+      cancelButtonText: "Cancel",
     });
+
+    if (text) {
+      axiosSecure
+        .patch(`/classes/feedback/${id}`, { feedback: text })
+        .then((res) => {
+          refetch();
+          if (res.data.modifiedCount) {
+            Swal.fire({
+              text: text,
+              timer: 1500,
+              showConfirmButton: false,
+            });
+            toast.success("Feedback Sended Successfully");
+          }
+        });
+    }
   };
 
   const handleMakeApproved = (id) => {
@@ -35,7 +58,7 @@ const ManageClasses = () => {
       }
     });
   };
-  
+
   return (
     <div>
       <Toaster />
@@ -74,30 +97,34 @@ const ManageClasses = () => {
               <td className="text-right">{c.enrolled_students}</td>
               <td
                 className={`uppercase 
-                ${c.status === "pending" && "text-error"}
-                ${c.status === "denied" && "text-accent"}
+                ${c.status === "pending" && "text-accent"}
+                ${c.status === "denied" && "text-error"}
                 ${c.status === "approved" && "text-success font-extrabold"}`}
               >
                 {c.status}
               </td>
               <th>
                 <button
+                  onClick={() => handleMakeApproved(c._id)}
+                  className="btn btn-accent mx-1 btn-xs"
+                  disabled={c.status === 'approved' || 
+                  c.status === "denied" ? true : false}
+                >
+                  Approve
+                </button>
+                <button
                   onClick={() => handleMakeDenied(c._id)}
                   className="btn btn-accent mx-1 btn-xs"
+                  disabled={c.status === 'approved' || 
+                  c.status === "denied" ? true : false}
                 >
                   Deny
                 </button>
                 <button
-                  onClick={() => handleMakeSuspend(c._id)}
+                  onClick={() => handleSendFeedBack(c._id)}
                   className="btn btn-accent mx-1 btn-xs"
                 >
-                  Suspend
-                </button>
-                <button
-                  onClick={() => handleMakeApproved(c._id)}
-                  className="btn btn-accent mx-1 btn-xs"
-                >
-                  Approve
+                  Feedback
                 </button>
               </th>
             </tr>

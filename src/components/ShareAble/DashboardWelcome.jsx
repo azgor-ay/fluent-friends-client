@@ -22,7 +22,7 @@ const DashboardWelcome = () => {
 
       {isAdmin && (
         <div>
-          <h1 className="dash-welcome-heading text-4xl">
+          <h1 className="dash-welcome-heading text-3xl">
             🌟 WELCOME TO <span className="text-primary">FLUENT</span> FRIENDS
             ADMIN PANEL 🌟
           </h1>

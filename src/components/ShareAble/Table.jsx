@@ -4,9 +4,10 @@ import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useSelectedClasses from "../../hooks/useSelectedClasses";
 import { Link } from "react-router-dom";
-
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Table = () => {
+  const [axiosSecure] = useAxiosSecure()
   const [selectedClass, refetch] = useSelectedClasses()
     const handleDelete = (id) =>{
         Swal.fire({
@@ -19,15 +20,9 @@ const Table = () => {
             confirmButtonText: "Yes",
           }).then((result) => {
             if (result.isConfirmed) {
-              fetch(`http://localhost:5000/selectedClasses/${id}`, {
-                method: "DELETE", 
-                // headers: {
-                //     'content-type' : 'application/json'
-                // }, 
-              })
-              .then(res => res.json())
-              .then(data => {
-                if(data.deletedCount > 0){
+              axiosSecure.delete(`/selectedClasses/${id}`)
+              .then(res => {
+                if(res.data.deletedCount > 0){
                     toast.success('Deleted Successfully')
                     refetch()
                 }

@@ -9,7 +9,7 @@ const usePaymentsOrEnrolled = () => {
   const { refetch, data: enrolledOrPayments = [] } = useQuery({
     queryKey: ["enrolledOrPayments", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure(`enrolledOrPayments?email=${user?.email}`);
+      const res = await axiosSecure(`/enrolledOrPayments?email=${user?.email}`);
       return res.data;
     },
   });

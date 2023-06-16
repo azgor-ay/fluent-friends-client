@@ -2,32 +2,48 @@ import { FaTrash } from "react-icons/fa";
 import useInstructorsAddedClasses from "../../hooks/useInstructorsAddedClasses";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Toaster, toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyClasses = () => {
   const [myAddedClasses, refetch] = useInstructorsAddedClasses();
   const [axiosSecure] = useAxiosSecure()
   const handleDelete = (id) =>{
-    axiosSecure.delete(`/classes/${id}`)
-    .then(res=> {
-        if(res.data.deletedCount){
-            toast.success('Deleted Successfully')
-            refetch()
+    Swal.fire({
+        title: "Remove from List?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "black",
+        cancelButtonColor: "gray",
+        cancelButtonText: "No",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/classes/${id}`)
+          .then(res => {
+            if(res.data.deletedCount > 0){
+                toast.success('Deleted Successfully')
+                refetch()
+            }
+          })
         }
-    })
-  }
+      });
+}
+
 
   return (
     <div>
         <Toaster/>
+        <h1 className="page-heading">All the classes i added</h1>
       <table className="table">
         {/* head */}
         <thead>
           <tr>
             <th>#</th>
             <th>Class/Course</th>
-            <th>Student Capacity</th>
+            <th>Available Seats</th>
             <th>Total Enrolled</th>
             <th>Class/Course Status</th>
+            <th>Admins Feedback</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -55,7 +71,13 @@ const MyClasses = () => {
               </td>
               <td>{course.available_seats}</td>
               <th>{course.enrolled_students}</th>
-              <th className="uppercase">{course.status}</th>
+              <th className={`uppercase 
+              ${course.status === 'approved' && "text-success"}
+              ${course.status === 'pending' && "text-accent"}
+              ${course.status === 'denied' && "text-error"}
+              `}>{course?.status}</th>
+              <th className="text-xs">{course.feedback? course.feedback : "N/A"}</th>
+
               <th>
                 <button 
                 onClick={()=>handleDelete(course._id)}

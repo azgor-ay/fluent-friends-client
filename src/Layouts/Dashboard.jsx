@@ -15,9 +15,11 @@ import { BsCollectionFill } from "react-icons/bs";
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
+import useStudent from "../hooks/useStudent";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  const [isStudent] = useStudent();
   return (
     <div className="drawer lg:drawer-open">
       <Helmet>
@@ -43,7 +45,9 @@ const Dashboard = () => {
             <div className="pb-12">
               <Logo></Logo>
             </div>
-            {!isAdmin && !isInstructor && (
+
+            {/* Students Dashboard */}
+            {isStudent && (
               <>
                 <li>
                   <NavLink
@@ -79,7 +83,6 @@ const Dashboard = () => {
               </>
             )}
 
-            {/* /dashboard/payment */}
 
             {/* Instructors Links */}
             {isInstructor && (

@@ -18,6 +18,7 @@ import MyClasses from "../Pages/Dashboard/MyClasses";
 import AdminOnly from "./AdminOnly";
 import ManageClasses from "../Pages/Dashboard/ManageClasses";
 import DashboardWelcome from "../components/ShareAble/DashboardWelcome";
+import StudentOnly from "./StudentOnly";
 
 const router = createBrowserRouter([
   {
@@ -58,19 +59,19 @@ const router = createBrowserRouter([
       // Student Links
       {
         path: "/dashboard/selectedClasses",
-        element: <PrivateRoute><SelectedClasses/></PrivateRoute>
+        element: <StudentOnly><SelectedClasses/></StudentOnly>
       }, 
       {
         path: "/dashboard/enrolledClasses",
-        element: <PrivateRoute><EnrolledClasses/></PrivateRoute>
+        element: <StudentOnly><EnrolledClasses/></StudentOnly>
       },
       {
         path: "/dashboard/payment/:id",
-        element: <PrivateRoute><Payment/></PrivateRoute>
+        element: <StudentOnly><Payment/></StudentOnly>
       },
       {
         path: "/dashboard/paymentHistory",
-        element: <PrivateRoute><PaymentHistory/></PrivateRoute>
+        element: <StudentOnly><PaymentHistory/></StudentOnly>
       },  
 
       // Instructors Links 
