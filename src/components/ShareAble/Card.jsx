@@ -35,7 +35,7 @@ const Card = ({ data }) => {
         flag,
         img,
         name,
-        instructor,
+        instructor, 
         price,
         email: user.email,
       };

@@ -25,7 +25,7 @@ const Dashboard = () => {
       </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-start">
-        <div>
+        <div className="w-10/12">
           <Outlet></Outlet>
         </div>
         <label

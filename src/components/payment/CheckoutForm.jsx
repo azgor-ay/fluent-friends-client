@@ -1,30 +1,26 @@
 /* eslint-disable react/prop-types */
-import {
-  CardElement,
-  useCartElementState,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-
-const CheckoutForm = ({ price }) => {
+import { Toaster, toast } from "react-hot-toast";
+const CheckoutForm = ({ price, enrolledFor }) => {
   const stripe = useStripe();
-  const elements = useCartElementState();
+  const elements = useElements();
   const [cardError, setCardError] = useState(" ");
   const [axiosSecure] = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
   const { user } = useContext(AuthContext);
-
+  const [processing, setProcessing] = useState(false);
+  console.log({ stripe, elements });
   useEffect(() => {
     if (price) {
-      axiosSecure.post("/create-payment-intent", { price })
-      .then((res) => {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
     }
-  }, [price]);
+  }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +33,7 @@ const CheckoutForm = ({ price }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -47,9 +43,8 @@ const CheckoutForm = ({ price }) => {
       setCardError(error.message);
     } else {
       setCardError(" ");
-      console.log("payment method", paymentMethod);
-    } 
-
+    }
+    setProcessing(true);
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -63,12 +58,41 @@ const CheckoutForm = ({ price }) => {
     if (confirmError) {
       console.log(confirmError);
     }
-    console.log(paymentIntent);
+    console.log("payment intent", paymentIntent);
+    setProcessing(false);
+    if (paymentIntent.status === "succeeded") {
+      const transactionId = paymentIntent.id;
+      toast.success(
+        `Transaction complete with TRANSACTION ID: ${transactionId}`
+      );
+      // Save payment info to db
+      const payment = {
+        studentName: user?.displayName,
+        email: user?.email,
+        date: new Date(),
+        enrolledClassName: enrolledFor.name,
+        enrolledClassInstructorName: enrolledFor.instructor,
+        price,
+        idInSelectedClassDB: enrolledFor._id,
+        enrolledClassId: enrolledFor.classId,
+      };
+      axiosSecure.post("/payments", payment).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          console.log("saved to db");
+        }
+      });
+    }
   };
   return (
     <div className="w-full mx-auto text-base-content">
-      <form onSubmit={handleSubmit} className="w-full">
+      <Toaster></Toaster>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full border border-gray-700 bg-opacity-40 rounded-3xl p-12"
+      >
         <CardElement
+          className="border border-gray-600 border-opacity-50 shadow-2xl p-2 w-full"
           options={{
             style: {
               base: {
@@ -87,7 +111,7 @@ const CheckoutForm = ({ price }) => {
         <button
           className="btn btn-primary btn-sm mt-8"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || processing}
         >
           Pay
         </button>

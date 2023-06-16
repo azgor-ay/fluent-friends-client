@@ -63,27 +63,22 @@ const Table = () => {
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
                     <img
-                      src={c.flag}
+                      src={c.flag?c.flag:c.img}
                       alt="Avatar Tailwind CSS Component"
                     />
                   </div>
                 </div>
                 <div>
                   <div className="font-bold">{c.name}</div>
-                  <div className="text-sm opacity-50">Seats left</div>
                 </div>
               </div>
             </td>
             <td>
               {c.instructor}
-              <br />
-              <span className="badge badge-ghost badge-sm">
-                email
-              </span>
             </td>
             <td className="text-right">${c.price}</td>
             <th>
-              <Link to={`/dashboard/payment/${c.classId}`}>
+              <Link to={`/dashboard/payment/${c._id}`}>
               <button className="btn btn-xs"> Enroll Now</button>
               </Link> 
               <span className="px-4">- or -</span>
