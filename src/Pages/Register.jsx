@@ -140,7 +140,7 @@ const Register = () => {
                 <input
                   type={showPass ? "text" : "password"}
                   placeholder="password"
-                  className="input input-bordered"
+                  className="input input-bordered pr-12"
                   {...register("password", {
                     required: true,
                     // eslint-disable-next-line no-useless-escape
@@ -175,7 +175,7 @@ const Register = () => {
                 <input
                   type={showConPass ? "text" : "password"}
                   placeholder="Re-Type Password"
-                  className="input input-bordered"
+                  className="input input-bordered pr-12"
                   {...register("conPassword", { required: true })}
                 />
                 <span

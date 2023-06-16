@@ -53,7 +53,7 @@ const Card = ({ data }) => {
         showCancelButton: true,
         confirmButtonColor: "black",
         cancelButtonColor: "gray",
-        cancelButtonText: "Explore more",
+        cancelButtonText: "Stay Here",
         confirmButtonText: "Redirect to Login",
       }).then((result) => {
         if (result.isConfirmed) {

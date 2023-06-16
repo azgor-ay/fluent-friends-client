@@ -3,61 +3,52 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const ManageClasses = () => {
-  const [axiosSecure] = useAxiosSecure()
+  const [axiosSecure] = useAxiosSecure();
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
     return res.data;
   });
 
   const handleMakeDenied = (id) => {
-    fetch(`http://localhost:5000/classes/denied/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        if (data.modifiedCount) {
-          toast.success("Class Denied Successfully");
-        }
-      });
+    axiosSecure.patch(`/classes/denied/${id}`).then((res) => {
+      refetch();
+      if (res.data.modifiedCount) {
+        toast.success("Class Denied Successfully");
+      }
+    });
   };
 
   const handleMakeSuspend = (id) => {
-    fetch(`http://localhost:5000/classes/pending/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        if (data.modifiedCount) {
-          toast.success("Class Suspended Successfully");
-        }
-      });
+    axiosSecure.patch(`/classes/pending/${id}`).then((res) => {
+      refetch();
+      if (res.data.modifiedCount) {
+        toast.success("Class Suspended Successfully");
+      }
+    });
   };
 
   const handleMakeApproved = (id) => {
-    fetch(`http://localhost:5000/classes/approved/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        if (data.modifiedCount) {
-          toast.success("Class Approved Successfully");
-        }
-      });
+    axiosSecure.patch(`/classes/approved/${id}`).then((res) => {
+      refetch();
+      if (res.data.modifiedCount) {
+        toast.success("Class Approved Successfully");
+      }
+    });
   };
+  
   return (
     <div>
-      <Toaster/>
+      <Toaster />
       <table className="table">
-        {/* head */}    
+        {/* head */}
         <thead>
           <tr>
             <th>#</th>
             <th>Class/Course</th>
             <th>Price</th>
-            <th>Enrolled Students</th>
+            <th>
+              Enrolled <br /> Students
+            </th>
             <th>Current Status</th>
             <th>Actions</th>
           </tr>
@@ -70,10 +61,7 @@ const ManageClasses = () => {
                 <div className="flex justify-start items-center space-x-3">
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12 bg-white">
-                      <img
-                        src={c.img}
-                        alt="Avatar Tailwind CSS Component"
-                      />
+                      <img src={c.img} alt="Avatar Tailwind CSS Component" />
                     </div>
                   </div>
                   <div>

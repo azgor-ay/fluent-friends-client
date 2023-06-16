@@ -4,49 +4,37 @@ import { FaUser, FaUserGraduate, FaUserShield } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
-  const [axiosSecure] = useAxiosSecure()
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await axiosSecure.get("/users");
     return res.data;
   });
 
   const handleMakeStudent = (id) => {
-    fetch(`http://localhost:5000/users/student/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        if (data.modifiedCount) {
-          toast.success("Student or a Learner");
-        }
-      });
+    axiosSecure.patch(`/users/student/${id}`).then((res) => {
+      refetch();
+      if (res.data.modifiedCount) {
+        toast.success("Student or a Learner");
+      }
+    });
   };
 
   const handleMakeInstructor = (id) => {
-    fetch(`http://localhost:5000/users/instructor/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        if (data.modifiedCount) {
-          toast.success("Instructor or a Teacher");
-        }
-      });
+    axiosSecure.patch(`/users/instructor/${id}`).then((res) => {
+      refetch();
+      if (res.data.modifiedCount) {
+        toast.success("Instructor or a Teacher");
+      }
+    });
   };
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        if (data.modifiedCount) {
-          toast.success("Admin Powered");
-        }
-      });
+    axiosSecure.patch(`/users/admin/${id}`).then((res) => {
+      refetch();
+      if (res.data.modifiedCount) {
+        toast.success("Admin Powered");
+      }
+    });
   };
 
   return (

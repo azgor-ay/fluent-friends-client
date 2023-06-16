@@ -65,7 +65,7 @@ const Login = () => {
                   type={showPass? "text": 'password'}
                   placeholder="password"
                   name="password"
-                  className="input input-bordered"
+                  className="input input-bordered pr-12"
                 />
                 <span
                   onClick={() => setPassShow(!showPass)}
