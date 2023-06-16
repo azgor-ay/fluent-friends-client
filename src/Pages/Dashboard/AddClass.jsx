@@ -35,7 +35,7 @@ export default function AddClass() {
             instructor: user?.displayName,
             email: user?.email,
             available_seats,
-            price,
+            price: parseFloat(price),
             enrolled_students: 0,
             status: "pending",
           };
