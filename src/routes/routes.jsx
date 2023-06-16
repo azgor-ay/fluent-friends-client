@@ -19,11 +19,13 @@ import AdminOnly from "./AdminOnly";
 import ManageClasses from "../Pages/Dashboard/ManageClasses";
 import DashboardWelcome from "../components/ShareAble/DashboardWelcome";
 import StudentOnly from "./StudentOnly";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main/>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -50,6 +52,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivateRoute><Dashboard/></PrivateRoute>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
 
       {
