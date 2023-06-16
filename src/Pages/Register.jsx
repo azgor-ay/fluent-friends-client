@@ -11,6 +11,8 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
+  const image_hosting_token = import.meta.env.VITE_IMG_UPLOAD_TOKEN;
+  const image_hosted_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
   const {
     register,
     handleSubmit,
@@ -19,42 +21,54 @@ const Register = () => {
   const onSubmit = (data) => {
     if (data?.password !== data?.conPassword) {
       toast.error("Password did'nt matched!");
-      console.log("not matched");
     } else {
-      registerUser(data.email, data.password)
-        // eslint-disable-next-line no-unused-vars
-        .then(() => {
-          toast.success("User created successfully!");
-          updateUserProfile(data.name, data.profilePhoto)
-            .then(() => {
-              console.log("user profile info updated");
-              const savedUser = {
-                name: data.name,
-                email: data.email,
-                profilePhoto: data.profilePhoto,
-                role: 'student'
-              };
+      const formData = new FormData();
+      formData.append("image", data.profilePhoto[0]);
 
-              fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(savedUser),
+      fetch(image_hosted_url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((imgResponse) => {
+          if (imgResponse.success) {
+            const profilePhoto = imgResponse.data.display_url;
+            registerUser(data.email, data.password)
+              // eslint-disable-next-line no-unused-vars
+              .then(() => {
+                toast.success("User created successfully!");
+                updateUserProfile(data.name, profilePhoto)
+                  .then(() => {
+                    console.log("user profile info updated");
+                    const savedUser = {
+                      name: data.name,
+                      email: data.email,
+                      profilePhoto: profilePhoto,
+                      role: "student",
+                    };
+
+                    fetch("http://localhost:5000/users", {
+                      method: "POST",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify(savedUser),
+                    })
+                      .then((res) => res.json())
+                      .then((data) => {
+                        if (data.insertedId) {
+                          toast.success("Welcome to Fluent Friends territory");
+                          navigate(from, { replace: true });
+                        }
+                      });
+                  })
+                  .catch((error) => console.log(error.message));
               })
-                .then((res) => res.json())
-                .then((data) => {
-                  if (data.insertedId) {
-                    toast.success("Welcome to Fluent Friends territory");
-                    navigate(from, { replace: true });
-                  }
-                });
-            })
-            .catch((error) => console.log(error.message));
-        })
-        .catch((error) => {
-          toast.error(error.message);
-          console.log(error.message);
+              .catch((error) => {
+                toast.error(error.message);
+                console.log(error.message);
+              });
+          }
         });
     }
   };
@@ -91,17 +105,11 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">Upload Profile Picture</span>
                 </label>
-                {/* TODO: ImgBB Upload */}
                 <input
-                  type="text"
-                  className="file-input file-input-sm w-full max-w-xs file-input-bordered file-input-primary"
-                  {...register("profilePhoto", { required: true })}
-                />
-                {/* <input
                   type="file"
                   className="file-input file-input-sm w-full max-w-xs file-input-bordered file-input-primary"
                   {...register("profilePhoto", { required: true })}
-                /> */}
+                />
                 {errors.profilePhoto && (
                   <span className="text-error">This field is required</span>
                 )}
